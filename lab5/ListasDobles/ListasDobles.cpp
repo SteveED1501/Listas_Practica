@@ -1,19 +1,74 @@
-// ListasDobles.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
+#include "HistorialDoble.h"
+#include "RotacionCircular.h"
+using namespace EIF201;
 
-#include <iostream>
+int main() {
 
-int main()
-{
-    std::cout << "Hello World!\n";
+    cout << "\nMODULO A: HistorialDoble" << endl;
+    {
+        HistorialDoble h;
+
+        h.insertarAlFinal("rock1");
+        h.insertarAlFinal("pop7");
+        h.insertarAlFinal("jazz3");
+        h.insertarAlInicio("clas5");
+        h.insertarEnPosicion("folk2", 2);
+        h.insertarAntesDe("jazz3", "bosa1");
+        h.insertarDespuesDe("pop7", "soul4");
+
+        h.imprimirCronologico();
+        
+
+        h.imprimirInverso();
+        
+        
+        cout << "Posicion jazz3: " << h.obtenerPosicion("jazz3") << endl; 
+        cout << "Cancion en pos 0: " << h.obtenerEnPosicion(0) << endl;
+        cout << "jazz3 existe: " << (h.existeCancion("jazz3") ? "si" : "no") << endl;
+        cout << "Pos desde final pop7: " << h.obtenerPosicionDesdeElFinal("pop7") << endl;
+
+        h.eliminarPrimera("bosa1");
+        h.eliminarCabeza();
+        h.eliminarCola();
+        h.eliminarEnPosicion(1);
+        h.eliminarUltima("pop7");
+
+        h.imprimirCronologico();
+
+        cout << "Cantidad: " << h.getCantidad() << endl;
+
+
+    cout << "\nMODULO B: RotacionCircular" << endl;
+    {
+        RotacionCircular r;
+
+        r.insertarAlFinal("Maria");
+        r.insertarAlFinal("Carlos");
+        r.insertarAlFinal("Adriana");
+        r.insertarAlInicio("Diego");
+        r.insertarDespuesDe("Carlos", "Elena");
+
+        r.imprimirRotacion();
+
+        cout << "Carlos existe: " << (r.existeLocutor("Carlos") ? "si" : "no") << endl; 
+        cout << "Posicion Carlos: " << r.obtenerPosicion("Carlos") << endl;
+        cout << "Turno actual: " << r.turnoActual() << endl; 
+
+        r.simularTurnos(7);
+
+        r.eliminarLocutor("Carlos");
+        r.eliminarTurnoActual();
+        r.imprimirRotacion();
+
+        cout << "Cantidad: " << r.getCantidad() << endl;
+
+        r.eliminarLocutor("Adriana");
+        while (!r.estaVacia()) { r.eliminarTurnoActual(); }
+
+        cout << "Vacia: " << (r.estaVacia() ? "si" : "no") << endl; 
+        cout << "Siguiente vacia: '" << r.siguiente() << "'" << endl; 
+
+    }
+
+    return 0;
 }
-
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
-
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
